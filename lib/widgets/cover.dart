@@ -9,11 +9,7 @@ class Cover extends StatelessWidget {
     return Stack(
       children: [
         Image.asset('assets/products/product1.png'),
-        CustomPositioned(
-          svgpath: 'assets/svgs/11.svg',
-          bottom: -300,
-          left: 150,
-        ),
+        CustomPositioned(svgpath: 'assets/svgs/11.svg', bottom: 10, right: -15),
       ],
     );
   }
