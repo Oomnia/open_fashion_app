@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:open_fashion_app/models/product_model.dart';
+import 'package:open_fashion_app/screens/checkout_page.dart';
 import 'package:open_fashion_app/widgets/custom_text.dart';
 
-class ProductsListView extends StatelessWidget {
+class ProductsListView extends StatefulWidget {
   const ProductsListView({super.key});
 
+  @override
+  State<ProductsListView> createState() => _ProductsListViewState();
+}
+
+class _ProductsListViewState extends State<ProductsListView> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -20,30 +26,43 @@ class ProductsListView extends StatelessWidget {
       itemCount: ProductModel.products.length,
       itemBuilder: (context, index) {
         final product = ProductModel.products[index];
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(product.imgpath),
-            CustomText(
-              text: product.title,
-              size: 12,
-              weight: FontWeight.w500,
-              color: Colors.white,
+        return GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Checkout(
+                imgpath: product.imgpath,
+                title: product.title,
+                subtitle: product.subtitle,
+                price: product.price,
+              ),
             ),
-            CustomText(
-              text: product.subtitle,
-              size: 12,
-              max: 1,
-              weight: FontWeight.w400,
-              color: Color(0xffF9F9F9),
-            ),
-            CustomText(
-              text: "\$ ${product.price.toString()}",
-              size: 15,
-              weight: FontWeight.w400,
-              color: Color(0xffDD8560),
-            ),
-          ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(product.imgpath),
+              CustomText(
+                text: product.title,
+                size: 12,
+                weight: FontWeight.w500,
+                color: Colors.white,
+              ),
+              CustomText(
+                text: product.subtitle,
+                size: 12,
+                max: 1,
+                weight: FontWeight.w400,
+                color: Color(0xffF9F9F9),
+              ),
+              CustomText(
+                text: "\$ ${product.price.toString()}",
+                size: 15,
+                weight: FontWeight.w400,
+                color: Color(0xffDD8560),
+              ),
+            ],
+          ),
         );
       },
     );
