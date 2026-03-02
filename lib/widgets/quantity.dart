@@ -4,16 +4,21 @@ import 'package:open_fashion_app/widgets/custom_container.dart';
 import 'package:open_fashion_app/widgets/custom_text.dart';
 
 class Quantity extends StatefulWidget {
-  const Quantity({super.key});
+  const Quantity({super.key, required this.onChanged});
+
+
+final Function(int) onChanged;
 
   @override
   State<Quantity> createState() => _QuantityState();
 }
 
-int number = 1;
 
 class _QuantityState extends State<Quantity> {
+  int number = 1;
+
   @override
+
   Widget build(BuildContext context) {
     return Row(
       children: [
@@ -23,6 +28,7 @@ class _QuantityState extends State<Quantity> {
             if (number > 1) {
               setState(() {
                 number--;
+                widget.onChanged(number);
               });
             }
           },
@@ -42,6 +48,8 @@ class _QuantityState extends State<Quantity> {
           onPressed: () {
             setState(() {
               number++;
+                              widget.onChanged(number);
+
             });
           },
         ),

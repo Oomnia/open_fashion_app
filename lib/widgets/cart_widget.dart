@@ -9,15 +9,14 @@ class CartWidget extends StatelessWidget {
     required this.imgpath,
     required this.title,
     required this.subtitle,
-    required this.price,
+    required this.price, required this.onQtyChanged,
   });
 
   final String imgpath;
   final String title;
-
   final String subtitle;
   final double price;
-
+  final Function(int) onQtyChanged;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -50,7 +49,7 @@ class CartWidget extends StatelessWidget {
               ),
             ),
             Gap(30),
-            Quantity(),
+            Quantity(onChanged: onQtyChanged),
             Gap(20),
 
             CustomText(

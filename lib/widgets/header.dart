@@ -5,19 +5,19 @@ import 'package:open_fashion_app/core/colors.dart';
 import 'package:open_fashion_app/widgets/custom_text.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
-
+  const Header({super.key, required this.text});
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Center(
           child: CustomText(
-            text: 'Checkout'.toUpperCase(),
+            text: text.toUpperCase(),
             size: 20,
             weight: FontWeight.w400,
             color: AppColors.primary,
-            spacing: 5,
+            spacing: 3,
             height: 2,
           ),
         ),

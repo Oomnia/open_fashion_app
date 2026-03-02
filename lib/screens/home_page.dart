@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
           SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
                   Gap(120),
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                   AboutSection(),
                   Gap(20),
 
-                 CopyRightSectin(),
+                  CopyRightSectin(),
                 ],
               ),
             ),
