@@ -8,7 +8,7 @@ import 'package:open_fashion_app/widgets/custom_text.dart';
 import 'package:open_fashion_app/widgets/header.dart';
 import 'package:open_fashion_app/widgets/shipping_method.dart';
 
-class PlaceOrderPage extends StatelessWidget {
+class PlaceOrderPage extends StatefulWidget {
   const PlaceOrderPage({
     super.key,
     required this.imgpath,
@@ -25,6 +25,36 @@ class PlaceOrderPage extends StatelessWidget {
   final double price;
   final int qty;
   final double total;
+
+  @override
+  State<PlaceOrderPage> createState() => _PlaceOrderPageState();
+}
+
+class _PlaceOrderPageState extends State<PlaceOrderPage> {
+  
+  dynamic _savedAddress;
+
+  void _openAddress(context) async {
+    final adressData = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (c) => AddAdressPage()),
+    );
+    if (adressData != null) {
+      setState(() {
+        _savedAddress = adressData;
+      });
+    }
+  }
+
+  void _editAddress() async {
+    final newAddress = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (c) => AddAdressPage(editData: _savedAddress)),
+    );
+    setState(() {
+      _savedAddress = newAddress;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,17 +71,16 @@ class PlaceOrderPage extends StatelessWidget {
               weight: FontWeight.w600,
               color: Color(0xff888888),
             ),
-            AddressInfo(),
-            Gap(10),
-            ShippingMethod(
+ _savedAddress != null ? AddressInfo(
+                      savedAddress: _savedAddress,
+                      onTap: _editAddress,
+                    ) : SizedBox.shrink(),            Gap(10),
+           _savedAddress == null ? ShippingMethod(
               txt: 'Add shipping adress',
               icon: Icons.add,
               isfree: false,
-              ontap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddAdressPage()),
-              ),
-            ),
+              ontap: ()=> _openAddress(context)
+            ): SizedBox.shrink(), 
             Gap(20),
 
             CustomText(
@@ -92,7 +121,7 @@ class PlaceOrderPage extends StatelessWidget {
                   color: Color(0xff333333),
                 ),
                 CustomText(
-                  text: '\$ ${price * qty}',
+                  text: '\$ ${widget.price * widget.qty}',
                   size: 16,
                   weight: FontWeight.w600,
                   color: Color(0xffDD8560),
