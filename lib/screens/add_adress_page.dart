@@ -28,8 +28,7 @@ class _AddAdressPageState extends State<AddAdressPage> {
 
   final phoneController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  
-  
+
   @override
   void initState() {
     if (widget.editData != null) {
@@ -46,87 +45,90 @@ class _AddAdressPageState extends State<AddAdressPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(isBlackk: false),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Header(text: 'Add shipping adress'),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextfield(
-                        hintText: 'First name',
-                        controller: firstNameController,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomAppBar(isBlackk: false),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Header(text: 'Add shipping adress'),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextfield(
+                          hintText: 'First name',
+                          controller: firstNameController,
+                        ),
                       ),
-                    ),
-                    Gap(20),
-                    Expanded(
-                      child: CustomTextfield(
-                        hintText: 'Last name',
-                        controller: lastNameController,
+                      Gap(20),
+                      Expanded(
+                        child: CustomTextfield(
+                          hintText: 'Last name',
+                          controller: lastNameController,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Gap(20),
-                CustomTextfield(
-                  hintText: 'Adress',
-                  controller: addressController,
-                ),
+                    ],
+                  ),
+                  Gap(20),
+                  CustomTextfield(
+                    hintText: 'Adress',
+                    controller: addressController,
+                  ),
 
-                CustomTextfield(hintText: 'City', controller: cityController),
+                  CustomTextfield(hintText: 'City', controller: cityController),
 
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextfield(
-                        hintText: 'State',
-                        controller: stateController,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextfield(
+                          hintText: 'State',
+                          controller: stateController,
+                        ),
                       ),
-                    ),
-                    Gap(20),
-                    Expanded(
-                      child: CustomTextfield(
-                        hintText: 'ZIP code',
-                        controller: zipCodeController,
+                      Gap(20),
+                      Expanded(
+                        child: CustomTextfield(
+                          hintText: 'ZIP code',
+                          controller: zipCodeController,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Gap(20),
+                    ],
+                  ),
+                  Gap(20),
 
-                CustomTextfield(
-                  hintText: 'Phone number',
-                  controller: phoneController,
-                ),
-                Gap(260),
-                CustomButton(
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      final data = {
-                        'firstName': firstNameController.text,
-                        'lastName': lastNameController.text,
-                        'address': addressController.text,
-                        'city': cityController.text,
-                        'state': stateController.text,
-                        'zipCode': zipCodeController.text,
-                        'phone': phoneController.text,
-                      };
-                      Navigator.pop(context, data);
-                    } else {
-                      return;
-                    }
-                  },
-                  text: 'Add now'.toUpperCase(),
-                ),
-                Gap(20),
-              ],
+                  CustomTextfield(
+                    hintText: 'Phone number',
+                    controller: phoneController,
+                  ),
+                  Gap(260),
+                  CustomButton(
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        final data = {
+                          'firstName': firstNameController.text,
+                          'lastName': lastNameController.text,
+                          'address': addressController.text,
+                          'city': cityController.text,
+                          'state': stateController.text,
+                          'zipCode': zipCodeController.text,
+                          'phone': phoneController.text,
+                        };
+                        Navigator.pop(context, data);
+                      } else {
+                        return;
+                      }
+                    },
+                    text: 'Add now'.toUpperCase(),
+                  ),
+                  Gap(20),
+                ],
+              ),
             ),
           ),
         ),

@@ -44,6 +44,7 @@ class _CheckoutState extends State<Checkout> {
               title: widget.title,
               subtitle: widget.subtitle,
               price: widget.price,
+              qty: selectedQty,
               onQtyChanged: (v) {
                 setState(() {
                   selectedQty = v;
